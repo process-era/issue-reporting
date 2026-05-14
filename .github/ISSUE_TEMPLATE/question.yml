@@ -1,0 +1,58 @@
+name: Question
+description: Ask about expected behavior or usage.
+title: "[Question]: "
+labels:
+  - "type: question"
+  - "status: triage"
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: Question summary
+      placeholder: "Example: How should subprocess links behave after process release?"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Related area
+      multiple: true
+      options:
+        - Frontend
+        - Backend
+        - Process editor
+        - BPMN modelling
+        - AI assistant
+        - Authentication / permissions
+        - Deployment / infrastructure
+        - Documentation
+        - Unknown / not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: Describe what you want to understand.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Optional. Add relevant context, screenshots, or examples.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched for existing related issues.
+          required: true
+        - label: I removed or anonymized confidential data.
+          required: true
