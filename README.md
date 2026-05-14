@@ -83,7 +83,6 @@ Issues are triaged using labels such as:
 - `area: bpmn`
 - `area: ai`
 - `area: auth`
-- `area: deployment`
 - `area: docs`
 
 ---
