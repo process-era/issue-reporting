@@ -1,0 +1,97 @@
+name: Feature request
+description: Suggest a new capability for Process Era.
+title: "[Feature]: "
+labels:
+  - "type: feature"
+  - "status: triage"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature.
+
+        Please describe the underlying problem or workflow need, not only the desired solution.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: One-sentence description of the feature.
+      placeholder: "Example: Add reusable BPMN subprocess templates"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      multiple: true
+      options:
+        - Frontend
+        - Backend
+        - Process editor
+        - BPMN modelling
+        - AI assistant
+        - Authentication / permissions
+        - Deployment / infrastructure
+        - Documentation
+        - Unknown / not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What problem does this feature solve?
+      placeholder: "As a user, I want to ... so that ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed solution
+      description: Describe the desired behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Optional. Describe alternative solutions or workarounds.
+    validations:
+      required: false
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples, mockups, or references
+      description: Optional. Add screenshots, sketches, links, or examples.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Expected impact
+      options:
+        - Nice to have
+        - Improves existing workflow
+        - Enables an important use case
+        - Blocks adoption without it
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched for existing feature requests.
+          required: true
+        - label: I described the problem or use case.
+          required: true
+        - label: I removed or anonymized confidential data.
+          required: true
