@@ -1,0 +1,10 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: Security or sensitive report
+    url: https://processera.de
+    about: Please do not report security issues or sensitive data publicly. Contact the maintainers directly.
+
+  - name: Process Era website
+    url: https://processera.de
+    about: Learn more about Process Era.
