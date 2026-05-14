@@ -100,10 +100,3 @@ Typical issue states:
 6. `status: done` — resolved
 7. `status: wontfix` — intentionally not planned
 
----
-
-## Maintainer notes
-
-This repository is only for intake and public discussion.
-
-Implementation, internal planning, commits, pull requests, and releases happen in the private Process Era repository.
