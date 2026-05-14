@@ -1,0 +1,134 @@
+name: Issue completeness check
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+      - reopened
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  check:
+    name: Check issue completeness
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate issue content
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue
+            const body = issue.body || ''
+            const title = issue.title || ''
+
+            const requiredCommonSections = [
+              '### Summary'
+            ]
+
+            const bugSections = [
+              '### Current behavior',
+              '### Expected behavior',
+              '### Steps to reproduce',
+              '### Severity',
+              '### Checklist'
+            ]
+
+            const featureSections = [
+              '### Problem or use case',
+              '### Proposed solution',
+              '### Expected impact',
+              '### Checklist'
+            ]
+
+            const improvementSections = [
+              '### Current state',
+              '### Desired state',
+              '### Benefit',
+              '### Checklist'
+            ]
+
+            const questionSections = [
+              '### Question',
+              '### Checklist'
+            ]
+
+            function hasAllSections(sections) {
+              return sections.every(section => body.includes(section))
+            }
+
+            function hasEmptyRequiredContent() {
+              const badPatterns = [
+                '_No response_',
+                'TODO',
+                'todo',
+                'n/a',
+                'N/A'
+              ]
+
+              return badPatterns.some(pattern => body.includes(pattern))
+            }
+
+            let expectedSections = requiredCommonSections
+
+            if (title.startsWith('[Bug]:')) {
+              expectedSections = requiredCommonSections.concat(bugSections)
+            } else if (title.startsWith('[Feature]:')) {
+              expectedSections = requiredCommonSections.concat(featureSections)
+            } else if (title.startsWith('[Improvement]:')) {
+              expectedSections = requiredCommonSections.concat(improvementSections)
+            } else if (title.startsWith('[Question]:')) {
+              expectedSections = questionSections
+            }
+
+            const complete = hasAllSections(expectedSections) && !hasEmptyRequiredContent()
+
+            const owner = context.repo.owner
+            const repo = context.repo.repo
+            const issue_number = issue.number
+
+            if (!complete) {
+              await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number,
+                labels: ['status: needs-info']
+              })
+
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body: [
+                  'Thanks for opening this issue.',
+                  '',
+                  'Some required information appears to be missing or incomplete.',
+                  'Please review the issue template and fill in all relevant sections so we can triage it properly.',
+                  '',
+                  'Commonly missing information:',
+                  '',
+                  '- Clear summary',
+                  '- Expected behavior',
+                  '- Actual behavior',
+                  '- Steps to reproduce',
+                  '- Screenshots, logs, or examples where relevant',
+                  '- Environment details where relevant'
+                ].join('\n')
+              })
+
+              return
+            }
+
+            const labels = issue.labels.map(label => label.name)
+
+            if (labels.includes('status: needs-info')) {
+              await github.rest.issues.removeLabel({
+                owner,
+                repo,
+                issue_number,
+                name: 'status: needs-info'
+              }).catch(() => {})
+            }
