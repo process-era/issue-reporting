@@ -1,0 +1,139 @@
+name: Bug report
+description: Report something that is broken or behaves incorrectly.
+title: "[Bug]: "
+labels:
+  - "type: bug"
+  - "status: triage"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug.
+
+        Please do not include credentials, private customer data, access tokens, production exports, or confidential process information.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: Briefly describe the problem.
+      placeholder: "Example: BPMN edge reconnect swaps source and target"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      description: Which part of Process Era is affected?
+      multiple: true
+      options:
+        - Frontend
+        - Backend
+        - Process editor
+        - BPMN modelling
+        - AI assistant
+        - Authentication / permissions
+        - Deployment / infrastructure
+        - Documentation
+        - Unknown / not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current behavior
+      description: What currently happens?
+      placeholder: "Describe the incorrect behavior."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: What should happen instead?
+      placeholder: "Describe the correct behavior."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Provide exact steps so the issue can be reproduced.
+      placeholder: |
+        1. Open ...
+        2. Click ...
+        3. Drag ...
+        4. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: minimal-example
+    attributes:
+      label: Minimal example or test data
+      description: Optional. Add a minimal JSON/XML example, process structure, or configuration if relevant.
+      render: text
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs, console output, or error messages
+      description: Optional. Paste relevant browser console logs, API responses, stack traces, or server logs.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or screen recordings
+      description: Optional. Drag and drop images or videos here.
+    validations:
+      required: false
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      placeholder: "Example: Chrome 124, Firefox 126, Safari 17"
+    validations:
+      required: false
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "Example: Windows 11, macOS 14, Ubuntu 24.04"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How serious is this issue?
+      options:
+        - Low — minor annoyance
+        - Medium — affects normal usage
+        - High — blocks important work
+        - Critical — data loss, security, or production outage
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched for existing issues before opening this one.
+          required: true
+        - label: I removed or anonymized confidential data.
+          required: true
+        - label: I included clear steps to reproduce.
+          required: true
