@@ -1,0 +1,87 @@
+name: Improvement
+description: Suggest an improvement to an existing feature, workflow, UX, or performance.
+title: "[Improvement]: "
+labels:
+  - "type: improvement"
+  - "status: triage"
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      placeholder: "Example: Improve edge waypoint handling after node resize"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      multiple: true
+      options:
+        - Frontend
+        - Backend
+        - Process editor
+        - BPMN modelling
+        - AI assistant
+        - Authentication / permissions
+        - Deployment / infrastructure
+        - Documentation
+        - Unknown / not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-state
+    attributes:
+      label: Current state
+      description: What currently works, but could be better?
+    validations:
+      required: true
+
+  - type: textarea
+    id: desired-state
+    attributes:
+      label: Desired state
+      description: What should be improved?
+    validations:
+      required: true
+
+  - type: textarea
+    id: benefit
+    attributes:
+      label: Benefit
+      description: Who benefits from this improvement and why?
+    validations:
+      required: true
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples, screenshots, or references
+      description: Optional. Add screenshots, mockups, videos, or links.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Suggested priority
+      options:
+        - Low
+        - Medium
+        - High
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched for existing related issues.
+          required: true
+        - label: I described the current and desired behavior.
+          required: true
+        - label: I removed or anonymized confidential data.
+          required: true
